@@ -923,7 +923,7 @@ extension JSONSchema.ArrayContext: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        items = try container.decodeIfPresent(JSONSchema.self, forKey: .items)
+        items = try? container.decodeIfPresent(JSONSchema.self, forKey: .items) ?? .array
         maxItems = try container.decodeIfPresent(Int.self, forKey: .maxItems)
         _minItems = try container.decodeIfPresent(Int.self, forKey: .minItems)
         _uniqueItems = try container.decodeIfPresent(Bool.self, forKey: .uniqueItems)
